@@ -5,9 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
 @SpringBootApplication
 @RestController
 public class DemoApplication {
+	StatsDClient statsd = new NonBlockingStatsDClientBuilder()
+		.prefix("statsd")
+		.build();	
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -15,6 +21,7 @@ public class DemoApplication {
 
 	@RequestMapping("/")
 	String sayHello() {
+		statsd.incrementCounter("page.views");
 		return "💜 Java Datadog Self Monitoring 💜";
 	}
 }
