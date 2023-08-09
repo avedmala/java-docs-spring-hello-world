@@ -13,7 +13,9 @@ import com.timgroup.statsd.StatsDClient;
 public class DemoApplication {
 	StatsDClient statsd = new NonBlockingStatsDClientBuilder()
 		.prefix("statsd")
-		.build();	
+		.hostname("localhost")
+		.port(8125)
+		.build();
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
