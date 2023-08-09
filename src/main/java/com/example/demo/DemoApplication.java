@@ -11,10 +11,9 @@ import com.timgroup.statsd.StatsDClient;
 @SpringBootApplication
 @RestController
 public class DemoApplication {
-	private static StatsDClient statsd;
+	private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
 	public static void main(String[] args) {
-		statsd = new NonBlockingStatsDClientBuilder().build();
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
