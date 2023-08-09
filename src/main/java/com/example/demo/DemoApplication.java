@@ -11,7 +11,7 @@ import com.timgroup.statsd.StatsDClient;
 @SpringBootApplication
 @RestController
 public class DemoApplication {
-	StatsDClient statsd;
+	private static StatsDClient statsd;
 
 	public static void main(String[] args) {
 		statsd = new NonBlockingStatsDClientBuilder().build();
